@@ -8,7 +8,7 @@
 var sKey = "xpsample";
 
 var Server_Path = "http://localhost:8080/";
-var sAdl = Server_Path + "<c:url value='/xplatform/SampleApplication/'/>" + "SampleApplication.xadl";
+var sAdl = Server_Path + "<c:url value='/xplatform/basic/'/>" + "basic.xadl";
 var bOnError = false;
 var XPLATFORM_CAB_VER = "9.1.1.150";
 
@@ -20,6 +20,10 @@ function fn_onload()
 	XLauncher.key = sKey;
 	XLauncher.launch();
 	
+//	XPlatformAXCtrl.key = sKey;
+//	XPlatformAXCtrl.xadl = sAdl;
+//	XPlatformAXCtrl.autosize = true;
+//	XPlatformAXCtrl.run();
 }
 
 </SCRIPT>
