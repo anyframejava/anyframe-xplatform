@@ -1,7 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="1.2">
+<FDL version="1.4">
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="LISTPAGE" classname="LISTPAGE" inheritanceid="" position="absolute 0 0 576 30" titletext="paging">
+    <Layouts>
+      <Layout>
+        <Div height="34" id="divList" width="383" text="divList" position="absolute 0 0 576 30"/>
+      </Layout>
+    </Layouts>
     <Script type="xscript4.0"><![CDATA[include "lib::commonScript.xjs";
 
 var nCurrentPage = 1;	// 현재 페이지
@@ -134,10 +139,5 @@ function fnMakePage(){
 	
 	
 }]]></Script>
-    <Layout>
-      <Div height="34" id="divList" width="383" text="divList" position="absolute 0 0 576 30">
-        
-      </Div>
-    </Layout>
   </Form>
 </FDL>

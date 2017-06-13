@@ -24,8 +24,11 @@ import java.util.List;
 /**
  * ReflectionHelp class provides functions about reflection api.
  * 
- * @author SoYon Lim
- * @author JongHoon Kim
+ * @author Warren Mayocchi
+ * 
+ * @author modified by SoYon Lim
+ * @author modified by JongHoon Kim
+ * @author modified by Jongpil Park
  */
 public class ReflectionHelp {
 
@@ -34,7 +37,7 @@ public class ReflectionHelp {
 	 * object, including those inherited from parent classes.
 	 * 
 	 * @param target
-	 *            The class to examine.
+	 *            The class to examine. 
 	 * @return Array of fields.
 	 */
 	public static Field[] getAllDeclaredFields(Class<? extends Object> target) {
@@ -48,7 +51,7 @@ public class ReflectionHelp {
 		// Fetching all class fields
 		Field[] currentFields = target.getDeclaredFields();
 		temporary.addAll(Arrays.asList(currentFields));
-		return (Field[]) temporary.toArray(new Field[temporary.size()]);
+		return temporary.toArray(new Field[temporary.size()]);
 	}
 
 	/**
@@ -62,8 +65,7 @@ public class ReflectionHelp {
 	public static List<Field> getFields(Object bean) {
 		Field[] fields = getAllDeclaredFields(bean.getClass());
 		AccessibleObject.setAccessible(fields, true);
-		List<Field> fieldList = Arrays.asList(fields);
-		return fieldList;
+		return Arrays.asList(fields);
 	}
 
 	/**
@@ -75,18 +77,12 @@ public class ReflectionHelp {
 	 *            The specific object that contains the field.
 	 * @param value
 	 *            The value that will be applied to the field.
+	 * @throws IllegalAccessException
 	 */
-	public static void setField(Field field, Object bean, Object value) {
-		try {
-			if (value != null) {
-				field.set(bean, value);
-			}
-		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("Cannot set " + field.getName() + " = ("
-					+ value + ") Error: " + e.getMessage());
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException("Cannot set " + field.getName() + " = ("
-					+ value + ") Error: " + e.getMessage());
+	public static void setField(Field field, Object bean, Object value)
+			throws IllegalAccessException {
+		if (value != null) {
+			field.set(bean, value);
 		}
 	}
 
@@ -98,19 +94,11 @@ public class ReflectionHelp {
 	 * @param bean
 	 *            The specific object to examine.
 	 * @return The value of the field.
+	 * @throws IllegalAccessException
 	 */
-	public static Object getFieldValue(Field field, Object bean) {
-		try {
-			return field.get(bean);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Cannot get " + field.getName()
-					+ " Error: " + e.getMessage());
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-			throw new RuntimeException("Cannot get " + field.getName()
-					+ " Error: " + e.getMessage());
-		}
+	public static Object getFieldValue(Field field, Object bean)
+			throws IllegalAccessException {
+		return field.get(bean);
 	}
 
 	/**
@@ -119,17 +107,11 @@ public class ReflectionHelp {
 	 * @param createClass
 	 *            The Class to create an object from.
 	 * @return A newly created object of the Class.
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
-	public static Object newInstance(Class<? extends Object> createClass) {
-		try {
-			return createClass.newInstance();
-		} catch (InstantiationException e) {
-			throw new RuntimeException("Cannot create " + createClass.getName()
-					+ ": " + e.getMessage());
-
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException("Cannot create " + createClass.getName()
-					+ ": " + e.getMessage());
-		}
+	public static Object newInstance(Class<? extends Object> createClass)
+			throws InstantiationException, IllegalAccessException {
+		return createClass.newInstance();
 	}
 }

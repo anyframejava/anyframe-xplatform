@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="1.2">
+<FDL version="1.4">
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="WorkFrame" classname="WorkFrame" inheritanceid="" position="absolute 0 0 805 580" titletext="Work Frame" scrollbars="none" oninit="WorkFrame_oninit" style="background:#f2f2efff;" onclose="WorkFrame_onclose" onsetfocus="WorkFrame_onsetfocus">
-    <Layout>
-      <Div id="div_work" taborder="1" position="absolute 20 30 800 575"/>
-    </Layout>
+    <Layouts>
+      <Layout>
+        <Div id="div_work" taborder="1" position="absolute 20 30 800 575"/>
+      </Layout>
+    </Layouts>
     <Script type="xscript4.0"><![CDATA[include "lib::commonScript.xjs";
 
 var pv_winId;

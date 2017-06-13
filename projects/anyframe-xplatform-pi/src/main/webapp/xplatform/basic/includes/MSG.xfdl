@@ -1,7 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="1.2">
+<FDL version="1.4">
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="MSG" classname="MSG" inheritanceid="" position="absolute 0 0 408 120" titletext="MSG" onload="MSG_onload" style="background:#f2f2efff;">
+    <Layouts>
+      <Layout>
+        <TextArea id="txaMsg" taborder="0" position="absolute 34 22 374 73" wordwrap="char" readonly="true" style="background:transparent URL('theme://images/edit_bg_N.png') stretch 4,4 center middle;"/>
+        <Button id="btConfirm" taborder="1" text="확인" position="absolute 34 75 146 101" onclick="fnBtn_OnClick" userData="Y"/>
+        <Button id="btCancle" taborder="2" text="취소" onclick="fnBtn_OnClick" position="absolute 262 75 374 101" userData="N" visible="false"/>
+        <Button id="btSave" taborder="3" text="저장" onclick="fnBtn_OnClick" position="absolute 148 75 260 101" userData="S" visible="false"/>
+      </Layout>
+    </Layouts>
     <Script type="xscript4.0"><![CDATA[include "lib::commonScript.xjs";
 
 // form onload 이벤트 처리
@@ -36,11 +44,5 @@ function MSG_onload(obj:Form, e:LoadEventInfo)
 function fnBtn_OnClick(obj) {
 	close(obj.userData);
 }]]></Script>
-    <Layout>
-      <TextArea id="txaMsg" taborder="0" position="absolute 34 22 374 73" wordwrap="char" readonly="true" style="background:transparent URL('theme://images/edit_bg_N.png') stretch 4,4 center middle;"/>
-      <Button id="btConfirm" taborder="1" text="확인" position="absolute 34 75 146 101" onclick="fnBtn_OnClick" userData="Y"/>
-      <Button id="btCancle" taborder="2" text="취소" onclick="fnBtn_OnClick" position="absolute 262 75 374 101" userData="N" visible="false"/>
-      <Button id="btSave" taborder="3" text="저장" onclick="fnBtn_OnClick" position="absolute 148 75 260 101" userData="S" visible="false"/>
-    </Layout>
   </Form>
 </FDL>

@@ -8,7 +8,7 @@
 var sKey = "xpsample";
 
 var Server_Path = "http://localhost:8080/";
-var sAdl = Server_Path + "<c:url value='/xplatform/SampleApplication/'/>" + "SampleApplication.xadl";
+var sAdl = Server_Path + "<c:url value='/xplatform/basic/'/>" + "basic.xadl";
 var bOnError = false;
 var XPLATFORM_CAB_VER = "9.1.1.150";
 
@@ -20,6 +20,10 @@ function fn_onload()
 	XLauncher.key = sKey;
 	XLauncher.launch();
 	
+//	XPlatformAXCtrl.key = sKey;
+//	XPlatformAXCtrl.xadl = sAdl;
+//	XPlatformAXCtrl.autosize = true;
+//	XPlatformAXCtrl.run();
 }
 
 </SCRIPT>
@@ -46,7 +50,8 @@ function fn_onload()
 
 </HEAD>
 <BODY style="margin:0px;padding:0px;" onload="fn_onload()"  width='100%' height='100%' >
-<OBJECT ID="XPlatformAXCtrl" CLASSID="CLSID:FCB889AC-D683-47a0-B04C-8FC42E257E5B" width="1020" height="900"></OBJECT>
-<OBJECT ID="XLauncher" CLASSID="CLSID:3371DC5B-9C2F-4d01-AA1D-E7D62B217697" width="800" height="800"></OBJECT>
+<OBJECT ID="XPlatformAXCtrl" CLASSID="CLSID:43C5FE00-DD32-4792-83DB-19AE4F88F2A6" width="1020" height="900"></OBJECT>
+<OBJECT ID="XLauncher" CLASSID="CLSID:A30D5481-7381-4dd9-B0F4-0D1D37449E97" width="800" height="800"></OBJECT>
+
 </BODY>
 </HTML>

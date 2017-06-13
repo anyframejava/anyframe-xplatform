@@ -1,19 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="1.2">
+<FDL version="1.4">
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="GRDFIND" classname="GRDFIND" inheritanceid="" position="absolute 0 0 151 117" titletext="GRDFIND" onload="GRDFIND_onload" style="background:#f2f2efff;">
-    <Layout>
-      <Edit id="edtSearchKeyword" taborder="0" position="absolute 8 8 106 32" onkeydown="edtSearchKeyword_onkeydown"/>
-      <Button id="btSearch" taborder="1" text="global.domain.search" position="absolute 108 8 142 32" onclick="btSearch_onclick"/>
-      <GroupBox id="grbxDirection" text="global.domain.searchdirection" position="absolute 8 40 142 85" style="titlealign:topleft;"/>
-      <Radio id="rdDirection" taborder="2" position="absolute 16 54 144 86" direction="vertical" innerdataset="@dsRadioDir" codecolumn="CODE" datacolumn="TEXT" index="1" value="D">
-        <Contents>
-          <Layout code="U" text="Up"/>
-          <Layout code="D" text="Down"/>
-        </Contents>
-      </Radio>
-      <Button id="btClose" taborder="3" text="global.domain.close" position="absolute 59 89 93 113" onclick="btClose_onclick"/>
-    </Layout>
+    <Layouts>
+      <Layout>
+        <Edit id="edtSearchKeyword" taborder="0" position="absolute 8 8 106 32" onkeydown="edtSearchKeyword_onkeydown"/>
+        <Button id="btSearch" taborder="1" text="global.domain.search" position="absolute 108 8 142 32" onclick="btSearch_onclick"/>
+        <GroupBox id="grbxDirection" text="global.domain.searchdirection" position="absolute 8 40 142 85" style="titlealign:topleft;"/>
+        <Radio id="rdDirection" taborder="2" position="absolute 16 54 144 86" direction="vertical" innerdataset="@dsRadioDir" codecolumn="CODE" datacolumn="TEXT" index="1" value="D">
+          <Contents>
+            <Layouts>
+              <Layout code="U" text="Up"/>
+              <Layout code="D" text="Down"/>
+            </Layouts>
+          </Contents>
+        </Radio>
+        <Button id="btClose" taborder="3" text="global.domain.close" position="absolute 59 89 93 113" onclick="btClose_onclick"/>
+      </Layout>
+    </Layouts>
     <Objects>
       <Dataset id="dsRadioDir" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
         <ColumnInfo>

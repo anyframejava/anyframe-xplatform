@@ -26,11 +26,11 @@ import org.anyframe.query.dao.QueryServiceDaoSupport;
 import org.springframework.stereotype.Repository;
 
 /**
- * The MovieDao class is a DAO class to provide CRUD functions
- * related with Movie domain object.
+ * The MovieDao class is a DAO class to provide CRUD functions related with
+ * Movie domain object.
  * 
  * @author Youngmin Jo
- *
+ * 
  */
 @Repository("xplatformMovieDao")
 public class MovieDao extends QueryServiceDaoSupport {
@@ -40,26 +40,24 @@ public class MovieDao extends QueryServiceDaoSupport {
 		super.setQueryService(queryService);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<Map<String, Object>> getList(Map<String, Object> searchParamMap)
-			throws Exception {
-		Object[] args = new Object[]{"vo", searchParamMap};
-		return (List<Map<String, Object>>) this.findList("findXPLATFORMMovieList", new Object[]{args});
+	public List<Map<String, Object>> getList(Map<String, Object> searchParamMap) {
+		Object[] args = new Object[] { "vo", searchParamMap };
+		return super.findList("findXPLATFORMMovieList", new Object[] { args });
 	}
 
-	public void create(Movie movie) throws Exception{
+	public void create(Movie movie) {
 		movie.setMovieId("MV-" + System.currentTimeMillis());
-		create("createXPLATFORMMovie", movie);
+		super.create("createXPLATFORMMovie", movie);
 	}
-	
-	public void remove(String movieId) throws Exception {
+
+	public void remove(String movieId) {
 		Movie movie = new Movie();
 		movie.setMovieId(movieId);
-		remove("removeXPLATFORMMovie", movie);
+		super.remove("removeXPLATFORMMovie", movie);
 	}
 
-	public void update(Movie movie) throws Exception {
-		update("updateXPLATFORMMovie", movie);
+	public void update(Movie movie) {
+		super.update("updateXPLATFORMMovie", movie);
 	}
 
 }

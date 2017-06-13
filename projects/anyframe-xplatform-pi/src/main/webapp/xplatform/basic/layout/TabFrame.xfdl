@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<FDL version="1.2">
+<FDL version="1.4">
   <TypeDefinition url="..\default_typedef.xml"/>
   <Form id="TabFrame" classname="TabFrame" inheritanceid="" position="absolute 0 0 825 29" titletext="TabFrame" scrollbars="none" style="background:@gradation;border:0 none #808080ff,0 none #808080ff,1 solid #a8a8a2ff,0 none #808080ff;gradation:linear 0,0 #c0c0bcff 0,100 #efefefff [10% #efefefff];" onload="TabFrame_onload">
-    <Layout>
-      <Tab id="tab_WF_MDI" taborder="0" tabindex="0" showextrabutton="true" scrollbars="autoboth" class="tab_WF_MDI" position="absolute 8 8 800 30" onextrabuttonclick="tab_WF_MDI_onextrabuttonclick" onchanged="tab_WF_MDI_onchanged">
-        <Tabpages>
-        </Tabpages>
-      </Tab>
-    </Layout>
+    <Layouts>
+      <Layout>
+        <Tab id="tab_WF_MDI" taborder="0" tabindex="0" showextrabutton="true" scrollbars="autoboth" class="tab_WF_MDI" position="absolute 8 8 800 30" onextrabuttonclick="tab_WF_MDI_onextrabuttonclick" onchanged="tab_WF_MDI_onchanged">
+          <Tabpages/>
+        </Tab>
+      </Layout>
+    </Layouts>
     <Script type="xscript4.0"><![CDATA[include "lib::commonScript.xjs";
 
 function TabFrame_onload(obj:Form, e:LoadEventInfo)

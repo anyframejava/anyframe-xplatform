@@ -17,10 +17,8 @@ package org.anyframe.xplatform.util;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -48,6 +46,7 @@ import com.tobesoft.xplatform.data.VariableList;
  * 
  * @author Byunghun Woo
  * @author modified by Youngmin Jo
+ * @author modified by Jongpil Park
  */
 public class XPDataSetMapper {
 
@@ -64,11 +63,9 @@ public class XPDataSetMapper {
 	 *            if isCheck is 'true', when create Dataset, add check column to
 	 *            Dataset.
 	 * @return Dataset
-	 * 
-	 * @throws Exception
 	 */
 	public static DataSet convertVoListToDataset(String dataSetName,
-			List<Object> voList, boolean isCheck) throws Exception {
+			List<Object> voList, boolean isCheck) {
 		DataSet dataSet = new DataSet(dataSetName);
 		populate(dataSet, voList, isCheck);
 		return dataSet;
@@ -88,12 +85,9 @@ public class XPDataSetMapper {
 	 *            if isCheck is 'true', when create Dataset, add check column to
 	 *            Dataset.
 	 * @return Dataset
-	 * 
-	 * @throws Exception
 	 */
 	public static DataSet convertMapListToDataSet(String dataSetName,
-			List<Map<String, Object>> mapList, boolean isCheck)
-			throws Exception {
+			List<Map<String, Object>> mapList, boolean isCheck) {
 		DataSet dataSet = new DataSet(dataSetName);
 
 		populateMap(dataSet, mapList, isCheck);
@@ -112,11 +106,9 @@ public class XPDataSetMapper {
 	 *            Map List(List<Map<String, Object>>) to be converted into
 	 *            Dataset
 	 * @return Dataset
-	 * @return
-	 * @throws Exception
 	 */
 	public static DataSet convertMapListToDataSet(String dataSetName,
-			List<Map<String, Object>> mapList) throws Exception {
+			List<Map<String, Object>> mapList) {
 		return convertMapListToDataSet(dataSetName, mapList, false);
 	}
 
@@ -133,10 +125,9 @@ public class XPDataSetMapper {
 	 *            if isCheck is 'true', when create DataSet, add check column to
 	 *            DataSet.
 	 * @return DataSet
-	 * @throws Exception
 	 */
 	public static DataSet convertVoToDataset(String dataSetName, Object obj,
-			boolean isCheck) throws Exception {
+			boolean isCheck) {
 		DataSet dataSet = new DataSet(dataSetName);
 		populate(dataSet, obj, isCheck);
 		return dataSet;
@@ -155,10 +146,9 @@ public class XPDataSetMapper {
 	 *            if isCheck is 'true', when create DataSet, add check column to
 	 *            DataSet.
 	 * @return DataSet
-	 * @throws Exception
 	 */
 	public static DataSet convertMapToDataSet(String dataSetName,
-			Map<String, Object> map, boolean isCheck) throws Exception {
+			Map<String, Object> map, boolean isCheck) {
 		DataSet dataSet = new DataSet(dataSetName);
 		populateMap(dataSet, map, isCheck);
 		return dataSet;
@@ -177,10 +167,12 @@ public class XPDataSetMapper {
 	 * @param ds
 	 *            DataSet to be converted into Value Object(VO) List.
 	 * @return Map<String, Object>
-	 * @throws Exception
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	public static Map<String, Object> convertDatasetToListMap(
-			Class<? extends Object> cls, DataSet ds) throws Exception {
+			Class<? extends Object> cls, DataSet ds)
+			throws InstantiationException, IllegalAccessException {
 		return populateCudList(cls, ds);
 	}
 
@@ -202,11 +194,12 @@ public class XPDataSetMapper {
 	 *            name is 'test_sample', a attribute name of VO is 'testSample'
 	 *            this value must be true.
 	 * @return Map<String, Object>
-	 * @throws Exception
+	 * @throws IllegalAccessException
+	 * @throws InstantiationException
 	 */
 	public static Map<String, Object> convertDatasetToListMap(
 			Class<? extends Object> cls, DataSet ds, boolean convertToCamenCase)
-			throws Exception {
+			throws InstantiationException, IllegalAccessException {
 		return populateCudList(cls, ds, convertToCamenCase);
 	}
 
@@ -221,10 +214,9 @@ public class XPDataSetMapper {
 	 * @param ds
 	 *            DataSet to be converted into Map List.
 	 * @return Map<String, Object>
-	 * @throws Exception
 	 */
-	public static Map<String, Object> convertDataSetToListMap(DataSet ds)
-			throws Exception {
+	public static Map<String, List<Map<String, Object>>> convertDataSetToListMap(
+			DataSet ds) {
 		return populateListMap(ds);
 	}
 
@@ -246,10 +238,9 @@ public class XPDataSetMapper {
 	 *            name is 'test_sample', a attribute name of VO is 'testSample'
 	 *            this value must be true.
 	 * @return Map<String, Object>
-	 * @throws Exception
 	 */
-	public static Map<String, Object> convertDataSetToListMap(DataSet ds,
-			boolean convertToCamenCase) throws Exception {
+	public static Map<String, List<Map<String, Object>>> convertDataSetToListMap(
+			DataSet ds, boolean convertToCamenCase) {
 		return populateListMap(ds, convertToCamenCase);
 	}
 
@@ -264,10 +255,8 @@ public class XPDataSetMapper {
 	 * @param ds
 	 *            DataSet to be converted into Value Object(VO) List.
 	 * @return List<Map<String, Object>>
-	 * @throws Exception
 	 */
-	public static List<Map<String, Object>> convertDataSetToMapList(DataSet ds)
-			throws Exception {
+	public static List<Map<String, Object>> convertDataSetToMapList(DataSet ds) {
 		return populateList(ds);
 	}
 
@@ -287,10 +276,9 @@ public class XPDataSetMapper {
 	 *            name is 'test_sample', a attribute name of VO is 'testSample'
 	 *            this value must be true.
 	 * @return List<Map<String, Object>>
-	 * @throws Exception
 	 */
 	public static List<Map<String, Object>> convertDataSetToMapList(DataSet ds,
-			boolean convertToCamelCase) throws Exception {
+			boolean convertToCamelCase) {
 		return populateList(ds, convertToCamelCase);
 	}
 
@@ -300,13 +288,8 @@ public class XPDataSetMapper {
 	 * @param obj
 	 *            VO Object.
 	 * @return VariableList
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
-	public static VariableList convertVoToVariableList(Object obj)
-			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+	public static VariableList convertVoToVariableList(Object obj) {
 		VariableList variableList = new VariableList();
 		populate(variableList, obj);
 		return variableList;
@@ -339,7 +322,6 @@ public class XPDataSetMapper {
 	public static Object convertVariableListToVO(
 			Class<? extends Object> voClazz, VariableList variableList)
 			throws InstantiationException, IllegalAccessException {
-
 		return populate(voClazz, variableList);
 	}
 
@@ -348,14 +330,10 @@ public class XPDataSetMapper {
 	 * 
 	 * @param variableList
 	 *            VariableList to be converted
-	 * @return Map
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
+	 * @return Map<String, Object> Map object.
 	 */
 	public static Map<String, Object> convertVariableListToMap(
-			VariableList variableList) throws InstantiationException,
-			IllegalAccessException {
-
+			VariableList variableList) {
 		return VariableListPropertyValues.getVariableMap(variableList, false);
 	}
 
@@ -366,14 +344,10 @@ public class XPDataSetMapper {
 	 *            VariableList to be converted
 	 * @param convertToCamelCase
 	 *            true for convert columns to camelCase.
-	 * @return Map
-	 * @throws InstantiationException
-	 * @throws IllegalAccessException
+	 * @return Map<String, Object> Map object.
 	 */
 	public static Map<String, Object> convertVariableListToMap(
-			VariableList variableList, boolean convertToCamelCase)
-			throws InstantiationException, IllegalAccessException {
-
+			VariableList variableList, boolean convertToCamelCase) {
 		return VariableListPropertyValues.getVariableMap(variableList,
 				convertToCamelCase);
 	}
@@ -431,9 +405,10 @@ public class XPDataSetMapper {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	@SuppressWarnings( { "unchecked", "unused" })
-	private static Collection populate(Class voClazz, DataSet dataList)
-			throws InstantiationException, IllegalAccessException {
+	@SuppressWarnings("unused")
+	private static List<Object> populate(Class<?> voClazz,
+			DataSet dataList) throws InstantiationException,
+			IllegalAccessException {
 		return populate(voClazz, dataList, false);
 	}
 
@@ -455,11 +430,11 @@ public class XPDataSetMapper {
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
-	private static Collection<Object> populate(Class<? extends Object> voClazz,
+	private static List<Object> populate(Class<? extends Object> voClazz,
 			DataSet dataList, boolean converToCamelCase)
 			throws InstantiationException, IllegalAccessException {
 		int rowCount = dataList.getRowCount();
-		ArrayList<Object> list = new ArrayList<Object>();
+		List<Object> list = new ArrayList<Object>();
 		Object vo = null;
 		for (int i = 0; i < rowCount; i++) {
 			vo = voClazz.newInstance();
@@ -515,11 +490,11 @@ public class XPDataSetMapper {
 			Class<? extends Object> voClazz, DataSet dataList,
 			boolean converToCamelCase) throws InstantiationException,
 			IllegalAccessException {
-		ArrayList<Object> insertList = new ArrayList<Object>();
-		ArrayList<Object> updateList = new ArrayList<Object>();
-		ArrayList<Object> deleteList = new ArrayList<Object>();
+		List<Object> insertList = new ArrayList<Object>();
+		List<Object> updateList = new ArrayList<Object>();
+		List<Object> deleteList = new ArrayList<Object>();
 
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("insert", insertList);
 		resultMap.put("update", updateList);
 		resultMap.put("delete", deleteList);
@@ -550,9 +525,10 @@ public class XPDataSetMapper {
 	 * 
 	 * @param dataList
 	 *            DataSet to be converted
-	 * @return
+	 * @return Map<String, Object> Map object.
 	 */
-	private static Map<String, Object> populateListMap(DataSet dataList) {
+	private static Map<String, List<Map<String, Object>>> populateListMap(
+			DataSet dataList) {
 		return populateListMap(dataList, false);
 	}
 
@@ -566,15 +542,15 @@ public class XPDataSetMapper {
 	 *            DataSet to be converted
 	 * @param converToCamelCase
 	 *            true for convert columns to camelCase.
-	 * @return
+	 * @return Map<String, Object> Map object.
 	 */
-	private static Map<String, Object> populateListMap(DataSet dataList,
-			boolean converToCamelCase) {
-		ArrayList<Map<String, Object>> insertList = new ArrayList<Map<String, Object>>();
-		ArrayList<Map<String, Object>> updateList = new ArrayList<Map<String, Object>>();
-		ArrayList<Map<String, Object>> deleteList = new ArrayList<Map<String, Object>>();
+	private static Map<String, List<Map<String, Object>>> populateListMap(
+			DataSet dataList, boolean converToCamelCase) {
+		List<Map<String, Object>> insertList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> updateList = new ArrayList<Map<String, Object>>();
+		List<Map<String, Object>> deleteList = new ArrayList<Map<String, Object>>();
 
-		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, List<Map<String, Object>>> resultMap = new HashMap<String, List<Map<String, Object>>>();
 		resultMap.put("insert", insertList);
 		resultMap.put("update", updateList);
 		resultMap.put("delete", deleteList);
@@ -604,12 +580,10 @@ public class XPDataSetMapper {
 	 * row type. Key of the Map object for the row Type is "rowType".
 	 * 
 	 * @param dataList
-	 * 			DataSet to be converted
+	 *            DataSet to be converted
 	 * @return List<Map<String, Object>> List of Map object.
-	 * @throws Exception
 	 */
-	private static List<Map<String, Object>> populateList(DataSet dataList)
-			throws Exception {
+	private static List<Map<String, Object>> populateList(DataSet dataList) {
 		return populateList(dataList, false);
 	}
 
@@ -618,15 +592,14 @@ public class XPDataSetMapper {
 	 * row type. Key of the Map object for the row Type is "rowType".
 	 * 
 	 * @param dataList
-	 * 			DataSet to be converted
+	 *            DataSet to be converted
 	 * @param converToCamelCase
-	 * 			true for convert columns to camelCase.
+	 *            true for convert columns to camelCase.
 	 * @return List<Map<String, Object>> List of Map object.
-	 * @throws Exception
 	 */
 	private static List<Map<String, Object>> populateList(DataSet dataList,
-			boolean converToCamelCase) throws Exception {
-		ArrayList<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
+			boolean converToCamelCase) {
+		List<Map<String, Object>> resultList = new ArrayList<Map<String, Object>>();
 
 		int rowCount = dataList.getRowCount();
 
@@ -658,13 +631,8 @@ public class XPDataSetMapper {
 	 *            XPLATFORM variableList
 	 * @param vo
 	 *            Sever Side VO
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
-	private static void populate(VariableList variableList, Object vo)
-			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+	private static void populate(VariableList variableList, Object vo) {
 		Map<String, Object> propertyMap = setParameterMap(vo);
 		Iterator<Map.Entry<String, Object>> variableIterator = propertyMap
 				.entrySet().iterator();
@@ -685,14 +653,9 @@ public class XPDataSetMapper {
 	 *            XPLATFORM DataSet
 	 * @param vo
 	 *            Server Side VO
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
 	@SuppressWarnings("unused")
-	private static void populate(DataSet dataList, Object vo)
-			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+	private static void populate(DataSet dataList, Object vo) {
 		populate(dataList, vo, false);
 	}
 
@@ -706,25 +669,21 @@ public class XPDataSetMapper {
 	 *            Server Side VO
 	 * @param isCheck
 	 *            when check column is needed, then true
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
-	private static void populate(DataSet dataList, Object vo, boolean isCheck)
-			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+	private static void populate(DataSet dataList, Object vo, boolean isCheck) {
 		Map<String, Object> propertyMap = setParameterMap(vo);
 		setupColumnInfo(propertyMap, dataList, true, 0, isCheck);
 	}
 
 	/**
 	 * This method converts DataSet to Map object
+	 * 
 	 * @param dataList
-	 * 			DataSet to be converted
+	 *            DataSet to be converted
 	 * @param map
-	 * 			Map object
+	 *            Map object
 	 * @param isCheck
-	 * 			true for additional column for check box("_chk")
+	 *            true for additional column for check box("_chk")
 	 */
 	private static void populateMap(DataSet dataList, Map<String, Object> map,
 			boolean isCheck) {
@@ -738,14 +697,9 @@ public class XPDataSetMapper {
 	 *            XPLATFORM DataSet
 	 * @param voList
 	 *            List consisting of Value Object
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
-	@SuppressWarnings( { "unchecked", "unused" })
-	private static void populate(DataSet dataList, List voList)
-			throws IllegalAccessException, InvocationTargetException,
-			NoSuchMethodException {
+	@SuppressWarnings("unused")
+	private static void populate(DataSet dataList, List<Object> voList) {
 		populate(dataList, voList, false);
 
 	}
@@ -761,14 +715,9 @@ public class XPDataSetMapper {
 	 *            List consisting of Value Object
 	 * @param isCheck
 	 *            If the check field is need, then true
-	 * 
-	 * @throws IllegalAccessException
-	 * @throws InvocationTargetException
-	 * @throws NoSuchMethodException
 	 */
 	private static void populate(DataSet dataList, List<Object> voList,
-			boolean isCheck) throws IllegalAccessException,
-			InvocationTargetException, NoSuchMethodException {
+			boolean isCheck) {
 		if (voList.size() == 0)
 			return;
 		Map<String, Object> propertyMap = setParameterMap(voList.get(0));
@@ -790,7 +739,6 @@ public class XPDataSetMapper {
 	 *            List consisting of Map Object
 	 * @param isCheck
 	 *            If the check field is need, then true
-	 * 
 	 */
 	private static void populateMap(DataSet dataList,
 			List<Map<String, Object>> mapList, boolean isCheck) {
@@ -921,7 +869,7 @@ public class XPDataSetMapper {
 
 		AccessibleObject.setAccessible(field, true);
 
-		HashMap<String, Object> propertyMap = new HashMap<String, Object>();
+		Map<String, Object> propertyMap = new HashMap<String, Object>();
 		for (int i = 0; i < field.length; i++) {
 			try {
 				propertyMap.put(field[i].getName(), ReflectionHelp
@@ -938,8 +886,7 @@ public class XPDataSetMapper {
 	 * 
 	 * @param map
 	 * @param voClazz
-	 * @return Object
-	 * 			VO Object
+	 * @return Object VO Object
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
