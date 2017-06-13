@@ -31,7 +31,7 @@
 			<year>2007-2014</year>
 			<holder>삼성SDS</holder>
 		</copyright>
-		<releaseinfo>Version 1.6.0</releaseinfo>
+		<releaseinfo>Version 1.6.1-SNAPSHOT</releaseinfo>
 
 		<productname>Anyframe XPLATFORM Plugin</productname>
 
@@ -116,7 +116,7 @@
 					</thead>
 					<tbody>
 						<row>
-							<entry align="center"><ulink url="http://dev.anyframejava.org/docs/anyframe/plugin/optional/query/1.6.0/reference/htmlsingle/query.html">Query</ulink></entry>
+							<entry align="center"><ulink url="http://dev.anyframejava.org/docs/anyframe/plugin/optional/query/1.6.1-SNAPSHOT/reference/htmlsingle/query.html">Query</ulink></entry>
 							<entry align="center" valign="middle">2.0.0 > * > 1.4.0</entry>
 						</row>
 					</tbody>
