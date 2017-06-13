@@ -39,42 +39,47 @@ import com.tobesoft.xplatform.tx.PlatformException;
  * @author Youngmin Jo
  * @author modified by Jongpil Park
  */
-public class XPRequestHandlerUtil { 
+public class XPRequestHandlerUtil {
+
+	/**
+	 * Request Object to be converted PlatformRequest
+	 */
+	private HttpServletRequest request;
 
 	/**
 	 * Response Ojbect to be converted PlatformResponse
 	 */
-	private final HttpServletResponse response;
+	private HttpServletResponse response;
 
 	/**
 	 * contestType for PlatformRequest & PlatformResponse
 	 */
-	private final String contentType;
+	private String contentType;
 
 	/**
 	 * chatSet for PlatformRequest & PlatformResponse
 	 */
-	private final String charset;
+	private String charset;
 
 	/**
 	 * Input DataSetList
 	 */
-	private final DataSetList inDl;
+	private DataSetList inDl;
 
 	/**
 	 * Input VariableList
 	 */
-	private final VariableList inVl;
+	private VariableList inVl;
 
 	/**
 	 * Output DataSetList
 	 */
-	private final DataSetList outDl;
+	private DataSetList outDl;
 
 	/**
 	 * Output VariableList
 	 */
-	private final VariableList outVl;
+	private VariableList outVl;
 
 	/**
 	 * Constructor
@@ -90,12 +95,13 @@ public class XPRequestHandlerUtil {
 	public XPRequestHandlerUtil(HttpServletRequest request,
 			HttpServletResponse response, String contentType, String charset)
 			throws PlatformException {
+		this.request = request;
 		this.response = response;
 		this.contentType = contentType;
 		this.charset = charset;
 
 		HttpPlatformRequest platformRequest = new HttpPlatformRequest(
-				request, contentType, charset);
+				this.request, contentType, charset);
 		platformRequest.receiveData();
 		PlatformData inPlatformData = platformRequest.getData();
 
