@@ -1,4 +1,4 @@
-Anyframe Java XPLATFORM Plutin
+Anyframe Java XPLATFORM Plugin
 ====
 
 ### 매뉴얼(1.6.0)
